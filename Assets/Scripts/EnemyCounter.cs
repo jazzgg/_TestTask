@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCounter : MonoBehaviour, IPauseEventProvider, IPauseable
+public class EnemyCounter : MonoBehaviour, IPauseEventProvider, IRestartable
 {
     public event Action OnPause;
 
@@ -20,6 +20,10 @@ public class EnemyCounter : MonoBehaviour, IPauseEventProvider, IPauseable
             enemy.OnDied += OnEnemyDie;
         }
     }
+    public void Restart()
+    {
+        Initialize();
+    }
 
     private void OnEnemyDie(Enemy enemy)
     {
@@ -30,13 +34,5 @@ public class EnemyCounter : MonoBehaviour, IPauseEventProvider, IPauseable
             OnPause?.Invoke();
     }
 
-    public void Pause()
-    {
-        
-    }
-
-    public void Resume()
-    {
-        Initialize();   
-    }
+   
 }

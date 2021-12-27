@@ -2,10 +2,8 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour, IPauseable
+public class Player : MonoBehaviour, IRestartable, IStopable
 {
-    public event Action OnPause;
-
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
     [SerializeField]
@@ -29,12 +27,12 @@ public class Player : MonoBehaviour, IPauseable
         _input.Input.Jump.started += context => _jumper.Jump();
         _input.Input.Shoot.performed += context => _attacker.Attack();
     }
-    public void Pause()
+    public void Stop()
     {
         _input.Disable();
     }
 
-    public void Resume()
+    public void Restart()
     {
         _input.Enable();
     }

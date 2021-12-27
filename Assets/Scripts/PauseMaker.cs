@@ -2,16 +2,17 @@ using System.Collections.Generic;
 using System;
 public class PauseMaker 
 {
-    private List<IPauseable> _pauseables;
+    private List<IStopable> _stopables;
+    private List<IRestartable> _restartables;
 
     private IPauseEventProvider _pauseEventProvider;
     private IResumeEventProvider _resumeEventProvider;
 
     public PauseMaker(IPauseEventProvider pauseEventProvider,
-        IResumeEventProvider resumeEventProvider,
-        params IPauseable[] pauseables)
+        IResumeEventProvider resumeEventProvider)
     {
-        if (pauseables.Length == 0) return;
+        _stopables = new List<IStopable>();
+        _restartables = new List<IRestartable>();
 
         _pauseEventProvider = pauseEventProvider;
         _resumeEventProvider = resumeEventProvider;
@@ -19,35 +20,31 @@ public class PauseMaker
         _pauseEventProvider.OnPause += MakePause;
         _resumeEventProvider.OnResume += Resume;
 
-        _pauseables = new List<IPauseable>();
-
-        foreach (var pauseable in pauseables)
-        {
-            _pauseables.Add(pauseable);
-        }
     }
-    public void AddPauseable(IPauseable pauseable)
+    public void AddStopables(params IStopable[] stopables)
     {
-        _pauseables.Add(pauseable);
+        if (stopables.CheckLength() == false) return;
+
+        _stopables.SetList(stopables);
+    }
+    public void AddRestartables(params IRestartable[] restartables)
+    {
+        if (restartables.CheckLength() == false) return;
+
+        _restartables.SetList(restartables);
     }
     public void MakePause()
     {
-        DoForAll(pauseable => pauseable.Pause());
+        _stopables.DoForAll(stopable => stopable.Stop());
     }
     public void Resume()
     {
-        DoForAll(pauseable => pauseable.Resume());
+        _restartables.DoForAll(restartable => restartable.Restart());
     }
     public void Dispose()
     {
         _pauseEventProvider.OnPause -= MakePause;
         _resumeEventProvider.OnResume -= Resume;
     }
-    private void DoForAll(Action<IPauseable> predicate)
-    {
-        foreach (var pauseable in _pauseables)
-        {
-            predicate(pauseable);
-        }
-    }
+
 }

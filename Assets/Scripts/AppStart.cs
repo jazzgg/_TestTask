@@ -12,15 +12,20 @@ public class AppStart : MonoBehaviour
     private EndScreen _endScreen;
     [SerializeField]
     private EnemyCounter _enemyCounter;
+    [SerializeField]
+    private GameStatsCounter _gameStatsCounter;
     private PauseMaker _pauseMaker;
+    private Disposer _disposer;
 
     private void Start()
     {
         _player.Initialize();
         _enemySpawner.Initialize();
-        _endScreen.Initialize();
         _enemyCounter.Initialize();
-        _pauseMaker = new PauseMaker(_enemyCounter, _endScreen, 
-            _player, _endScreen, _enemySpawner, _enemyCounter);
+        _gameStatsCounter = new GameStatsCounter();
+        _endScreen.Initialize(_gameStatsCounter);
+        _pauseMaker = new PauseMaker(_enemyCounter, _endScreen);
+        _pauseMaker.AddStopables(_gameStatsCounter, _player, _endScreen);
+        _pauseMaker.AddRestartables(_gameStatsCounter, _endScreen, _enemySpawner, _enemyCounter, _player);
     }
 }

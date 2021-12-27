@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour, IPauseable
+public class EnemySpawner : MonoBehaviour, IRestartable
 {
     [SerializeField]
     private Enemy _prefab;
@@ -22,12 +22,7 @@ public class EnemySpawner : MonoBehaviour, IPauseable
         SpawnEnemy();
     }
 
-    public void Pause()
-    {
-        
-    }
-
-    public void Resume()
+    public void Restart()
     {
         Initialize();
     }
