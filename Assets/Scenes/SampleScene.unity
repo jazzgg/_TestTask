@@ -740,7 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 1679347063}
-  _animator: {fileID: 1679347064}
+  _animatorComponent: {fileID: 1679347064}
   _checkGroundPosition: {fileID: 866803227}
   _attacker: {fileID: 1761387580}
 --- !u!4 &935029046

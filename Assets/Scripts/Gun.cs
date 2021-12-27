@@ -6,6 +6,8 @@ using UnityEngine;
 public class Gun : AttackTool
 {
     [SerializeField]
+    private Animator _animator;
+    [SerializeField]
     private Bullet _prefab;
     [SerializeField]
     private Transform _bulletSpawnPoint;
@@ -35,9 +37,6 @@ public class Gun : AttackTool
         var bullet = _bullets.GetElement();
         bullet.SetPosition(_bulletSpawnPoint.position);
         bullet.SetDirection(bulletDirection);
-    }
-    private void OnShoot()
-    {
-
+        _animator.SetTrigger("Shoot");
     }
 }
