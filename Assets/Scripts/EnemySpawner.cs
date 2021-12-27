@@ -12,13 +12,13 @@ public class EnemySpawner : MonoBehaviour, IRestartable
     private int _minEnemyAmount, _maxEnemyAmount;
 
     private List<Enemy> _enemies;
-    private UnusedElementsList<Transform> _clearSpawnPoints;
+    private UnusedElementList<Transform> _clearSpawnPoints;
 
     public List<Enemy> Enemies => _enemies;
     public void Initialize()
     {
         _enemies = new List<Enemy>();
-        _clearSpawnPoints = new UnusedElementsList<Transform>(_spawnPoints);
+        _clearSpawnPoints = new UnusedElementList<Transform>(_spawnPoints);
         SpawnEnemy();
     }
 

@@ -7,6 +7,8 @@ public class Player : MonoBehaviour, IRestartable, IStopable
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
     [SerializeField]
+    private Animator _animator;
+    [SerializeField]
     private Transform _checkGroundPosition;
     private PlayerMover _mover;
     private PlayerJumper _jumper;
@@ -20,8 +22,8 @@ public class Player : MonoBehaviour, IRestartable, IStopable
         _rigidbody = GetComponent<Rigidbody2D>();
         _input = new PlayerInput();
         _input.Enable();
-        _mover = new PlayerMover(transform, _spriteRenderer);
-        _jumper = new PlayerJumper(_rigidbody, _checkGroundPosition);
+        _jumper = new PlayerJumper(_rigidbody, _checkGroundPosition, _animator);
+        _mover = new PlayerMover(transform, _animator);
         _attacker.Initialize();
 
         _input.Input.Jump.started += context => _jumper.Jump();

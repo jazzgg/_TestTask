@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnusedElementsList<T> 
+public class UnusedElementList<T> 
 {
     private List<T> _unusedElements;
 
-    public UnusedElementsList(T[] elements)
+    public UnusedElementList(T[] elements)
     {
         _unusedElements = new List<T>(elements.Length);
 
