@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class PlayerMover 
 {
@@ -9,9 +6,9 @@ public class PlayerMover
     private float _speed;
     private float _input;
 
-    public PlayerMover(Transform transform)
+    public PlayerMover(Transform transform, float speed)
     {
-        _speed = 10;
+        _speed = speed;
         _transform = transform;
     }
     public void CustomUpdate(float delta, float input)
@@ -25,6 +22,7 @@ public class PlayerMover
 
         var direction = new Vector2(input, 0);
         _transform.localScale = new Vector3(direction.x, _transform.localScale.y, _transform.localScale.z);
+
         Move(direction, delta);
     }
     public bool CheckMove()

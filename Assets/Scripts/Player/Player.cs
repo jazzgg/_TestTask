@@ -1,11 +1,18 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour, IRestartable, IStopable
 {
+    [Header("Jump Parameters")]
     [SerializeField]
-    private SpriteRenderer _spriteRenderer;
+    private float _jumpForce;
+    [SerializeField]
+    private float _groundCheckRadius;
+    [Space]
+    [Header("Movement Parameters")]
+    [SerializeField]
+    private float _speed;
+    [Space]
     [SerializeField]
     private Animator _animatorComponent;
     [SerializeField]
@@ -21,10 +28,11 @@ public class Player : MonoBehaviour, IRestartable, IStopable
     public void Initialize()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+
         _input = new PlayerInput();
         _input.Enable();
-        _jumper = new PlayerJumper(_rigidbody, _checkGroundPosition);
-        _mover = new PlayerMover(transform);
+        _jumper = new PlayerJumper(_rigidbody, _checkGroundPosition, _jumpForce, _groundCheckRadius);
+        _mover = new PlayerMover(transform, _speed);
         _attacker.Initialize();
         _animator = new PlayerAnimator(_animatorComponent, _mover.CheckMove, _jumper.CheckGround);
 

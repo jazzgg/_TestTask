@@ -1,6 +1,5 @@
 // GENERATED AUTOMATICALLY FROM 'Assets/PlayerInput.inputactions'
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;

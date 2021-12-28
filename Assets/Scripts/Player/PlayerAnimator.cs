@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimator 
@@ -20,17 +18,28 @@ public class PlayerAnimator
         if (_checkGround() == false)
         {
             _animator.SetTrigger("Jump");
+            SetRunningState(RunningStates.Null);
         }
         else
         {
             if (_checkMove())
             {
-                _animator.SetBool("isRunning", true);
+                SetRunningState(RunningStates.isRunning);
             }
             else
             {
-                _animator.SetBool("isRunning", false);
+                SetRunningState(RunningStates.isNotRunning);
             }
         }
+    }
+    private void SetRunningState(RunningStates state)
+    {
+        _animator.SetInteger("isRunning", ((int)state));
+    }
+    private enum RunningStates
+    {
+        isNotRunning,
+        isRunning,
+        Null
     }
 }

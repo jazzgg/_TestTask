@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AppStart : MonoBehaviour
@@ -14,8 +12,9 @@ public class AppStart : MonoBehaviour
     private EnemyCounter _enemyCounter;
     [SerializeField]
     private GameStatsCounter _gameStatsCounter;
-    private PauseMaker _pauseMaker;
+    [SerializeField]
     private Disposer _disposer;
+    private PauseMaker _pauseMaker;
 
     private void Start()
     {
@@ -25,6 +24,8 @@ public class AppStart : MonoBehaviour
         _gameStatsCounter = new GameStatsCounter();
         _endScreen.Initialize(_gameStatsCounter);
         _pauseMaker = new PauseMaker(_enemyCounter, _endScreen);
+        _disposer.Initialize(_pauseMaker);
+
         _pauseMaker.AddStopables(_gameStatsCounter, _player, _endScreen);
         _pauseMaker.AddRestartables(_gameStatsCounter, _endScreen, _enemySpawner, _enemyCounter, _player);
     }

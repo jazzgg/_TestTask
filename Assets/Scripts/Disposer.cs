@@ -1,15 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Disposer 
+public class Disposer : MonoBehaviour 
 {
     private List<IDisposeable> _disposables;
-    public Disposer(params IDisposeable[] disposables)
+    public void Initialize (params IDisposeable[] disposables)
     {
+        if (disposables.CheckLength() == false) return;
+
+        _disposables = new List<IDisposeable>();
         _disposables.SetList(disposables);
     }
-    public void Dispose()
+    private void OnDestroy()
     {
         _disposables.DoForAll(disposable => disposable.Dispose());
     }

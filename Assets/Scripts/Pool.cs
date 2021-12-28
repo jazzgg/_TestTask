@@ -35,7 +35,7 @@ public class Pool<T> where T : IPoolable
             }
         }
 
-        throw new Exception("there is no free elements");
+        throw new Exception("THERE IS NO FREE ELEMENT");
     }
 
 }

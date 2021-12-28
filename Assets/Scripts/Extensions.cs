@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public static class Extensions
 {
@@ -12,6 +10,9 @@ public static class Extensions
     }
     public static void SetList<T>(this List<T> list, T[] array)
     {
+        if (list == null)
+            throw new Exception("LIST IS NOT INITIALIZED");
+
         foreach (var elem in array)
         {
             list.Add(elem);

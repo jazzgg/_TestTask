@@ -10,14 +10,13 @@ public class PlayerJumper
     private Transform _checkGroundPosition;
     private float _jumpForce;
     private float _groundCheckRadius;
-    private bool _isJumping;
-    public PlayerJumper(Rigidbody2D rigidbody, Transform checkGroundPosition)
+    public PlayerJumper(Rigidbody2D rigidbody, Transform checkGroundPosition, float jumpForce, float groundCheckRadius)
     {
         _checkGroundPosition = checkGroundPosition;
         _rigidbody = rigidbody;
         _jumpDirection = new Vector2(0, 1).normalized;
-        _jumpForce = 7f;
-        _groundCheckRadius = 0.15f;
+        _jumpForce = jumpForce;
+        _groundCheckRadius = groundCheckRadius;
     }
     public void Jump()
     {

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using System;
-public class PauseMaker 
+public class PauseMaker : IDisposeable 
 {
     private List<IStopable> _stopables;
     private List<IRestartable> _restartables;
