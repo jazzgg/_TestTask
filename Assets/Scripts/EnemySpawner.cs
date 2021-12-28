@@ -34,6 +34,7 @@ public class EnemySpawner : MonoBehaviour, IRestartable
         for (int i = 0; i < enemyAmount; i++)
         {
             var enemy = Instantiate(_prefab, _clearSpawnPoints.PeekRandom().position, Quaternion.identity, transform);
+            enemy.Initialize();
             _enemies.Add(enemy);
         }
     }

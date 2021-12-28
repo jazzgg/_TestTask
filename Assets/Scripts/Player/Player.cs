@@ -36,7 +36,7 @@ public class Player : MonoBehaviour, IRestartable, IStopable
         _attacker.Initialize();
         _animator = new PlayerAnimator(_animatorComponent, _mover.CheckMove, _jumper.CheckGround);
 
-        _input.Input.Jump.started += context => _jumper.Jump();
+        _input.Input.Jump.performed += context => _jumper.Jump();
         _input.Input.Shoot.performed += context => _attacker.Attack();
     }
     public void Stop()

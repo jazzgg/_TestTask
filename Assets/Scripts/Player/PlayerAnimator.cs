@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerAnimator 
 {
     private Animator _animator;
+
     private Func<bool> _checkMove;
     private Func<bool> _checkGround;
 
